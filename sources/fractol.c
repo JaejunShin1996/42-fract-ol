@@ -6,51 +6,78 @@
 /*   By: jaeshin <jaeshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:45:41 by jaeshin           #+#    #+#             */
-/*   Updated: 2023/08/21 19:48:40 by jaeshin          ###   ########.fr       */
+/*   Updated: 2023/08/22 20:23:51 by jaeshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fractol.h"
 
-int	handle_keys(int keycode, void *mlx_ptr, void *window_ptr)
+int	exit_fractol(t_fractol *f)
 {
-	if (keycode == 53)
-	{
-		mlx_destroy_window(mlx_ptr, window_ptr);
-		exit(0);
-	}
+	mlx_destroy_window(f->mlx, f->win);
+	free(f->mlx);
+	free(f);
+	exit(0);
 	return (0);
+}
+
+int	key_handler(int keycode, t_fractol *f)
+{
+	if (keycode == ESC)
+		exit_fractol(f);
+	return (0);
+}
+
+// void	zoom(t_fractol *f, int x, int y, int zoom)
+// {
+// 	double	zoom_level;
+// }
+
+int	mouse_handler(int button, int x, int y)
+{
+	ft_printf("Mouse button %i, Position (%i, %i)\n", button, x, y);
+	return (0);
+}
+
+void	put_color_to_pixel(t_fractol *f, int x, int y, int colour)
+{
+	int	*info_img;
+
+	info_img = f->info_img;
+	// okay...but why divide by 4???????
+	info_img[y * f->size_line / 4 + x] = colour;
+	// printf("info img - %d, %d\n", x, y);
+}
+
+void	draw_fractol(t_fractol *f)
+{
+	f->x = SIZE * 0.333;
+	while (f->x < SIZE * 0.666)
+	{
+		f->y = SIZE * 0.333;
+		while (f->y < SIZE * 0.666)
+		{
+			put_color_to_pixel(f, f->x, f->y, 0xffff00);
+			// mlx_pixel_put(f->mlx, f->win, f->x, f->y, 0xffff00);
+			f->y++;
+		}
+		f->x++;
+	}
+	mlx_put_image_to_window(f->mlx, f->win, f->img, 0, 0);
 }
 
 int	main(int argc, char **argv)
 {
-	void	*connection;
-	void	*window;
-	float	x;
-	float	y;
-	int		result;
+	t_fractol	*f;
 
-	x = 900 * 0.333;
-	y = 900 * 0.333;
-	result = 0;
-	connection = mlx_init();
-	if (connection)
-		ft_printf("Connection successfully created! %d, %s\n", argc, argv[0]);
-	window = mlx_new_window(connection, 900, 900, argv[1]);
-	if (window)
-		ft_printf("Window successfully created! %p\n", window);
-	while (x < 900 * 0.666)
-	{
-		y = 900 * 0.333;
-		while (y < 900 * 0.666)
-		{
-			result = mlx_pixel_put(connection, window, x, y, 0xffff00);
-			ft_printf("result - %d\n", result);
-			y++;
-		}
-		x++;
-	}
-	mlx_key_hook(window, handle_keys, connection);
-	mlx_loop(connection);
+	if (argc != 2)
+		return (0);
+	f = malloc(sizeof(t_fractol));
+	init_f(f, argv[1]);
+	mlx_key_hook(f->win, key_handler, f->mlx);
+	mlx_mouse_hook(f->win, mouse_handler, f->mlx);
+	mlx_hook(f->win, 17, 0L, exit_fractol, f);
+	draw_fractol(f);
+	mlx_loop(f->mlx);
 	return (0);
 }
