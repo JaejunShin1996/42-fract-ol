@@ -6,7 +6,7 @@
 /*   By: jaeshin <jaeshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:45:41 by jaeshin           #+#    #+#             */
-/*   Updated: 2023/08/22 20:23:51 by jaeshin          ###   ########.fr       */
+/*   Updated: 2023/08/23 18:36:41 by jaeshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,8 @@ void	put_color_to_pixel(t_fractol *f, int x, int y, int colour)
 	int	*info_img;
 
 	info_img = f->info_img;
-	// okay...but why divide by 4???????
+	// okay...but why divide by 4??????? - 4 bytes
 	info_img[y * f->size_line / 4 + x] = colour;
-	// printf("info img - %d, %d\n", x, y);
 }
 
 void	draw_fractol(t_fractol *f)
@@ -58,7 +57,6 @@ void	draw_fractol(t_fractol *f)
 		while (f->y < SIZE * 0.666)
 		{
 			put_color_to_pixel(f, f->x, f->y, 0xffff00);
-			// mlx_pixel_put(f->mlx, f->win, f->x, f->y, 0xffff00);
 			f->y++;
 		}
 		f->x++;
