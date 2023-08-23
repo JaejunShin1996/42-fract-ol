@@ -6,7 +6,7 @@
 /*   By: jaeshin <jaeshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:45:41 by jaeshin           #+#    #+#             */
-/*   Updated: 2023/08/23 18:36:41 by jaeshin          ###   ########.fr       */
+/*   Updated: 2023/08/23 21:17:05 by jaeshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int	exit_fractol(t_fractol *f)
 {
+	mlx_destroy_image(f->mlx, f->img);
 	mlx_destroy_window(f->mlx, f->win);
 	free(f->mlx);
 	free(f);
@@ -21,10 +22,10 @@ int	exit_fractol(t_fractol *f)
 	return (0);
 }
 
-int	key_handler(int keycode, t_fractol *f)
+int	key_handler(int keycode)
 {
 	if (keycode == ESC)
-		exit_fractol(f);
+		exit(1);
 	return (0);
 }
 
