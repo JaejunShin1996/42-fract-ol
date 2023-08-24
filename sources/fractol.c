@@ -49,15 +49,39 @@ void	put_color_to_pixel(t_fractol *f, int x, int y, int colour)
 	info_img[y * f->size_line / 4 + x] = colour;
 }
 
+void	mandelbrot(t_fractol *f)
+{
+	int		i;
+	double	temp;
+
+	i = 0;
+	f->zx = 0.0;
+	f->zy = 0.0;
+	while (i < 200)
+	{
+		temp = (f->zx * f->zx) - (f->zy * f->zy) + f->cx;
+		f->zy = 2 * f->zx * f->zy + f->cy;
+		f->zx = temp;
+		if ((f->zx * f->zx) + (f->zy * f->zy) >= __DBL_MAX__)
+			break ;
+		i++;
+	}
+	if (i == 200)
+		put_color_to_pixel(f, f->x, f->y, 0x000000);
+	else
+		put_color_to_pixel(f, f->x, f->y, (0x0000FF * i));
+}
+
 void	draw_fractol(t_fractol *f)
 {
-	f->x = SIZE * 0.333;
-	while (f->x < SIZE * 0.666)
+	f->x = 0;
+	f->y = 0;
+	while (f->x < SIZE)
 	{
-		f->y = SIZE * 0.333;
-		while (f->y < SIZE * 0.666)
+		f->y = 0;
+		while (f->y < SIZE)
 		{
-			put_color_to_pixel(f, f->x, f->y, 0xffff00);
+			mandelbrot(f);
 			f->y++;
 		}
 		f->x++;
