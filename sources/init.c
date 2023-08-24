@@ -6,7 +6,7 @@
 /*   By: jaeshin <jaeshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 17:15:59 by jaeshin           #+#    #+#             */
-/*   Updated: 2023/08/23 21:08:48 by jaeshin          ###   ########.fr       */
+/*   Updated: 2023/08/24 16:43:07 by jaeshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,4 +22,18 @@ void	init_f(t_fractol *f, char *argv)
 	f->info_img = mlx_get_data_addr(f->img, &f->bits_per_piexl, &f->size_line, &f->endian);
 	f->x = 0;
 	f->y = 0;
+	f->offset_x = 2.25;
+	f->offset_y = 1.55;
+	f->zoom = 0.0029;
+	f->colour = BEIGE;
+}
+
+int	exit_fractol(t_fractol *f)
+{
+	mlx_destroy_image(f->mlx, f->img);
+	mlx_destroy_window(f->mlx, f->win);
+	free(f->mlx);
+	free(f);
+	exit(0);
+	return (0);
 }
