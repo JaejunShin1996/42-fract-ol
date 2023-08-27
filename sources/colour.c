@@ -6,7 +6,7 @@
 /*   By: jaeshin <jaeshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 15:43:28 by jaeshin           #+#    #+#             */
-/*   Updated: 2023/08/24 16:28:17 by jaeshin          ###   ########.fr       */
+/*   Updated: 2023/08/27 15:05:59 by jaeshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 void	change_colour(t_fractol *f)
 {
-	if (f->colour == COBALT_BLUE)
-		f->colour = BEIGE;
-	else if (f->colour == BEIGE)
-		f->colour = NAVAJO_WHITE;
-	else if (f->colour == NAVAJO_WHITE)
-		f->colour = BABY_BLUE;
-	else if (f->colour == BABY_BLUE)
-		f->colour = COBALT_BLUE;
+	if (f->colour == COLOUR4)
+		f->colour = COLOUR1;
+	else if (f->colour == COLOUR1)
+		f->colour = COLOUR2;
+	else if (f->colour == COLOUR2)
+		f->colour = COLOUR3;
+	else if (f->colour == COLOUR3)
+		f->colour = COLOUR4;
 }
 
 void	put_colour_to_pixel(t_fractol *f, int x, int y, int colour)
