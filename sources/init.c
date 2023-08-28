@@ -6,7 +6,7 @@
 /*   By: jaeshin <jaeshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 17:15:59 by jaeshin           #+#    #+#             */
-/*   Updated: 2023/08/27 16:13:29 by jaeshin          ###   ########.fr       */
+/*   Updated: 2023/08/28 11:18:04 by jaeshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	init_f(t_fractol *f, char *option)
 	f->mlx = mlx_init();
 	f->win = mlx_new_window(f->mlx, SIZE, SIZE, option);
 	f->img = mlx_new_image(f->mlx, SIZE, SIZE);
-	f->info_img = mlx_get_data_addr(f->img, &f->bits_per_piexl, &f->size_line, &f->endian);
+	f->info_img = mlx_get_data_addr(f->img, &f->bbp, &f->size_line, &f->endian);
 	f->option = option;
 	f->x = 0;
 	f->y = 0;
@@ -31,11 +31,13 @@ void	init_f(t_fractol *f, char *option)
 
 void	input_error(char *input)
 {
-	if ((ft_strncmp("mandelbrot", input, 11) != 0) &&
-		(ft_strncmp("julia", input, 6) != 0) &&
-		(ft_strncmp("burningShip", input, 12) != 0))
+	if ((ft_strncmp("mandelbrot", input, 11) != 0)
+		&& (ft_strncmp("julia", input, 6) != 0)
+		&& (ft_strncmp("julia2", input, 7) != 0)
+		&& (ft_strncmp("burningShip", input, 12) != 0))
 	{
-		ft_printf("Available sets are mandelbrot, julia or burningShip\n");
+		ft_printf("Available sets are mandelbrot, julia, ");
+		ft_printf("julia2 or burningShip\n");
 		exit(0);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: jaeshin <jaeshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 15:41:21 by jaeshin           #+#    #+#             */
-/*   Updated: 2023/08/26 16:46:12 by jaeshin          ###   ########.fr       */
+/*   Updated: 2023/08/28 11:14:46 by jaeshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,21 +28,21 @@ void	zoom(t_fractol *f, int x, int y, int zoom)
 {
 	double	zoom_level;
 
-	zoom_level = 1.7;
+	zoom_level = 1.2;
 	if (zoom == ZOOM_IN)
 	{
-		f->offset_x = (x / f->zoom + f->offset_x) -
-						(x / (f->zoom * zoom_level));
-		f->offset_y = (y / f->zoom + f->offset_y) -
-						(y / (f->zoom * zoom_level));
+		f->offset_x = (x / f->zoom + f->offset_x) - (x
+				/ (f->zoom * zoom_level));
+		f->offset_y = (y / f->zoom + f->offset_y) - (y 
+				/ (f->zoom * zoom_level));
 		f->zoom *= zoom_level;
 	}
 	else if (zoom == ZOOM_OUT)
 	{
-		f->offset_x = (x / f->zoom + f->offset_x) -
-						(x / (f->zoom / zoom_level));
-		f->offset_y = (y / f->zoom + f->offset_y) -
-						(y / (f->zoom / zoom_level));
+		f->offset_x = (x / f->zoom + f->offset_x) - (x 
+				/ (f->zoom / zoom_level));
+		f->offset_y = (y / f->zoom + f->offset_y) - (y 
+				/ (f->zoom / zoom_level));
 		f->zoom /= zoom_level;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: jaeshin <jaeshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:40:17 by jaeshin           #+#    #+#             */
-/*   Updated: 2023/08/27 16:12:28 by jaeshin          ###   ########.fr       */
+/*   Updated: 2023/08/28 11:29:06 by jaeshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 
 // Size
 # define SIZE 900
-# define MAX_ITERATION 40
+# define MAX_ITERATION 200
 
 // Keycodes
 # define ESC 53
@@ -39,10 +39,10 @@
 
 // Colours
 # define BLACK 0x000000
-# define COLOUR1 0x202020
-# define COLOUR2 0x404040
-# define COLOUR3 0x606060
-# define COLOUR4 0x808080
+# define COLOUR1 0x404040
+# define COLOUR2 0xFFA500
+# define COLOUR3 0xADD8E6
+# define COLOUR4 0xFAD99D
 
 typedef struct s_fractol
 {
@@ -50,7 +50,7 @@ typedef struct s_fractol
 	void	*win;
 	void	*img;
 	void	*info_img;
-	int		bits_per_piexl;
+	int		bbp;
 	int		size_line;
 	int		endian;
 	char	*option;
@@ -72,7 +72,7 @@ void	input_error(char *input);
 int		exit_fractol(t_fractol *f);
 
 // Event
-int		mouse_handler(int button,int x, int y, t_fractol *f);
+int		mouse_handler(int button, int x, int y, t_fractol *f);
 int		key_handler(int keycode, t_fractol *f);
 void	zoom(t_fractol *f, int x, int y, int zoom);
 void	move(t_fractol *f, int move);
